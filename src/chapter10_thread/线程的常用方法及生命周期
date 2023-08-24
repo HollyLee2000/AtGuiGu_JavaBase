@@ -1,0 +1,36 @@
+线程的构造器：
+1.public Thread()：分配一个新的线程对象
+2.public Thread(String name)：分配一个指定名字的新的对象
+3.public Thread(Runnable target)：指定创建线程的目标对象
+4.public Thread(Runnable target, String name)：分配一个带有指定目标的新的线程对象并指定名字
+
+复习：构造器不会继承给子类，子类需要写一个构造器去调super(XXX...)
+
+线程常用方法：
+1.start():启动线程+调用线程的run
+2.run():线程要执行的操作
+3.currentThread():获取当前执行代码的对应线程
+4.currentThread().getName():获取线程名
+5.currentThread().setName():设置线程名
+6.sleep(long millis):睡多少毫秒，是静态方法，可通过类调用（Thread.sleep）
+7.yeild():主动释放cpu的使用权，也是静态方法，通过类调用
+8.join():在线程a中通过线程b调用join()，意味着线程a进入阻塞状态，直到线程b执行结束，线程a才结束阻塞状态，继续执行
+9.isAlive():判断当前线程是否还存活
+
+过时的方法：
+stop():强行结束一个线程的执行，进入死亡状态
+suspend()/resume():暂停和恢复线程，但是暂停期间不会释放任何锁资源，可能造成死锁
+
+线程的优先级：
+getPriority():获得线程优先级
+setPriority():设置线程优先级，范围[1,10]
+
+Thread类内部声明的三个优先级常量：
+    MAX_PRIORITY(10):最高优先级
+    MIN_PRIORITY(1):最低优先级
+    NORM_PRIORITY(5):普通优先级，默认情况下main线程具有普通优先级
+通过Thread.XXX来调用
+
+线程调度策略：
+1.分时调度：所有线程‘轮流使用’CPU的使用权，并且平均分配每个线程占用CPU的时间
+2.抢占式调度：让优先级高的线程以较大的概率优先使用CPU(但不同线程还是会有交互，不会阻塞)。如果线程的优先级相同，那么会随机选择一个。

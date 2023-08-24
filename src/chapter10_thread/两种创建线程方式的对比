@@ -1,0 +1,13 @@
+共同点：
+1.启动线程，使用的都是Thread类定义的start。
+2.创建的线程对象，都是Thread类或其子类的实例
+
+不同点：一个是类的继承，一个是接口的实现。
+    建议使用实现Runnable接口的方式：
+    1.实现Runnable接口的方式避免了类的单继承的局限性
+    2.更适合处理有共享数据的问题
+    3.实现了代码和数据的分离(同上共享数据)
+
+联系：public class Thread implements Runnable （代理模式，Thread本身是实现了Runnable接口的类）
+
+在同时传入Runnable实现类和重写run方法的情况下，重写的run方法优先
