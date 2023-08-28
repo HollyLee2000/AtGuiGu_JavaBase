@@ -34,3 +34,16 @@ Thread类内部声明的三个优先级常量：
 线程调度策略：
 1.分时调度：所有线程‘轮流使用’CPU的使用权，并且平均分配每个线程占用CPU的时间
 2.抢占式调度：让优先级高的线程以较大的概率优先使用CPU(但不同线程还是会有交互，不会阻塞)。如果线程的优先级相同，那么会随机选择一个。
+
+线程的生命周期(5.0以前)：
+1.新建(new一个线程对象)-->就绪：start();
+2.就绪-->运行:获得cpu执行权；运行-->就绪:失去cpu执行权、yield();
+3.运行-->死亡:run()执行结束、出现了未被处理的error或exception、stop();
+4.运行-->阻塞：sleep()、join()、失去同步锁、wait()、suspend()暂停;
+5.阻塞-->就绪(不能直接到运行):sleep时间到、join()对应线程运行结束、获得同步锁、wait()时间结束或使用notify()唤醒或notifyAll()唤醒全部、resume()恢复暂停
+
+5.0以后，阻塞分为了三类：
+1.锁阻塞(blocked):失去同步锁而阻塞
+2.无限等待：不带超时值的Object的wait或Thread的join、condition的await(对应condition的signal结束阻塞)、LockSupport.park
+3.计时等待：Thread.sleep()、带有超时值的Object的wait或Thread的join、JUC里的LockSupport.parkNanos、LockSupport.parkUntil
+
